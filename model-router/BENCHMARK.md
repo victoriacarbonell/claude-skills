@@ -12,7 +12,7 @@ On a large task that can be split into parts, does `model-router` reduce cost wi
 
 | | Run A (control) | Run B (skill) |
 | --- | --- | --- |
-| Skill installed | No | Yes |
+| Skill installed | No | Yes, at project level |
 | Prompt | Identical | Identical |
 | Main model | Opus | Opus |
 | Repository | Fresh clone of [nutri-app](https://github.com/victoriacarbonell/nutri-app) | Fresh clone of nutri-app |
@@ -51,19 +51,24 @@ Why this task: it mixes mechanical work (35 file summaries), medium work (the AP
 ## How to run it
 
 ```bash
-# Run A first, before the skill is installed
+git clone https://github.com/victoriacarbonell/claude-skills
 git clone https://github.com/victoriacarbonell/nutri-app run-a
+git clone https://github.com/victoriacarbonell/nutri-app run-b
+
+# Install the skill for Run B only, at project level
+mkdir -p run-b/.claude/skills
+cp -r claude-skills/model-router run-b/.claude/skills/
+
+# Run A, in one terminal
 cd run-a && claude
 #   /model opus  ->  paste the prompt  ->  when it finishes: /usage
-cd ..
 
-# Install the skill, then Run B
-mkdir -p ~/.claude/skills && cp -r claude-skills/model-router ~/.claude/skills/
-git clone https://github.com/victoriacarbonell/nutri-app run-b
+# Run B, in another terminal
 cd run-b && claude
 #   /model opus  ->  paste the same prompt  ->  when it finishes: /usage
-cd ..
 ```
+
+The skill is copied into `run-b/.claude/skills/` instead of the user-level skills directory, so Run A cannot see it and the two runs can go in parallel. The skill must not be installed at user level while the test runs. Send no other message in either session until the task finishes, since any extra turn changes the usage.
 
 After each run, copy the Session block that `/usage` prints (total cost, durations and "Usage by model") into the results below.
 
