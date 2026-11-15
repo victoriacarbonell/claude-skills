@@ -27,3 +27,7 @@ See each skill's README for requirements and usage.
 ## Feedback
 
 Issues and suggestions are welcome. If a skill does not behave as described, please open an issue with the task you tried and what happened.
+
+## License
+
+[MIT](LICENSE)
