@@ -7,6 +7,7 @@ A collection of skills for Claude that I build and use in my own work. Each skil
 | Skill | What it does |
 | --- | --- |
 | [model-router](model-router/) | Saves usage on large tasks: the current model splits the work, delegates each part to the cheapest model that can do it well, and reviews the result. |
+| [scheduled-task-watchdog](scheduled-task-watchdog/) | Sets up a lightweight scheduled task that re-runs your other scheduled tasks when they fail because the usage limit was reached. |
 
 ## Installation
 
