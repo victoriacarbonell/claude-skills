@@ -1,6 +1,6 @@
 ---
 name: model-router
-description: Use only when the user sends a large task that can be split into parts, or says "split it": the current model breaks it down, delegates each part to the cheapest model that can do it well, and reviews the result.
+description: "Use only when the user sends a large task that can be split into parts, or says 'split it'. The current model breaks it down, delegates each part to the cheapest model that can do it well, and reviews the result."
 ---
 
 # Model router
