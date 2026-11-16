@@ -43,9 +43,14 @@ The skill activates on its own when a task is large enough. You can also steer i
 
 The commands work in any language.
 
+## Benchmark
+
+The skill was tested on one documentation task; see [BENCHMARK.md](BENCHMARK.md). In short: it did not activate by itself, and when forced with "split it" it gave the cheapest and fastest run with complete coverage, but missed two of four bugs that only show up when files are read together. One run per condition.
+
 ## Limitations
 
 - **Savings are not guaranteed.** Each subagent starts with no context, so delegation has overhead. The skill pays off on large, mechanical, well-defined work, and can break even or cost more on tasks that depend heavily on context.
-- **Activation is a judgment call.** Some environments are conservative about launching subagents, so the skill may not trigger by itself. "split it" is the reliable way to force it.
+- **Do not expect it to activate by itself.** In the benchmark it never did, even with the task clearly matching its description. Say "split it" to use it.
+- **Splitting can lose cross-file findings.** Each subagent sees only its own part, so problems that only appear when two files are read together can be missed.
 - **Model tiers change.** The Haiku < Sonnet < Opus ordering is written into the skill; update it if the lineup changes.
 - By default subagents are told not to make commits, pushes or pull requests unless you ask for them.
